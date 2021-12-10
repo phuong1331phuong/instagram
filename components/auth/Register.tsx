@@ -22,7 +22,10 @@ export default function Register() {
 
 	return (
 		<View>
-			<TextInput placeholder='name' onChangeText={(name) => setName(name)} />
+			<TextInput
+				placeholder='name'
+				onChangeText={(name) => setName(name)}
+			/>
 			<TextInput
 				placeholder='email'
 				onChangeText={(email) => setEmail(email)}
@@ -63,3 +66,4 @@ export default function Register() {
 		</View>
 	);
 }
+
