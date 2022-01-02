@@ -10,7 +10,8 @@ import { getAnalytics } from "firebase/analytics";
 import RegisterScreen from "./components/auth/Register";
 import LoginScreen from "./components/auth/Login";
 import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
-import { NativeBaseProvider, Box } from 'native-base';
+import { NativeBaseProvider, Box, Center } from 'native-base';
+import theme from "./components/lib/theme";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optinal
 const firebaseConfig = {
@@ -44,7 +45,7 @@ export default function App() {
   useEffect(componentDidMount);
   if (!loaded) {
     return (
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={theme}>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <Text> Loading</Text>
       </View>
@@ -54,7 +55,18 @@ export default function App() {
 
   if (!loggedIn) {
     return (
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={theme}>
+        <Box height="100%" _dark={{
+        borderColor: "coolGray.600",
+        backgroundColor: "gray.700",
+      }}
+      _web={{
+        shadow: 2,
+        borderWidth: 0,
+      }}
+      _light={{
+        backgroundColor: "gray.50",
+      }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing">
           <Stack.Screen
@@ -66,13 +78,25 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginScreen} />
         </Stack.Navigator>
       </NavigationContainer>
+            </Box>
       </NativeBaseProvider>
     );
   }
 
   return (
-    <NativeBaseProvider>
-    <View style={{ flex: 1, justifyContent: "center" }}>
+    <NativeBaseProvider theme={theme}>
+        <Box height="100%" _dark={{
+        borderColor: "coolGray.600",
+        backgroundColor: "gray.700",
+      }}
+      _web={{
+        shadow: 2,
+        borderWidth: 0,
+      }}
+      _light={{
+        backgroundColor: "gray.50",
+      }}>
+            <Center>
       <Text> User is logged in</Text>
         <Button
           title="Log Out"
@@ -86,7 +110,8 @@ export default function App() {
               });
           }}
         />
-    </View>
+                </Center>
+        </Box>
     </NativeBaseProvider>
   );
 }
